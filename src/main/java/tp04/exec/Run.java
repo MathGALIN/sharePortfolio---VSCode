@@ -28,6 +28,7 @@ public class Run {
         ActionComposee bqAss;
         Jour j1, j2;
 
+        
         // init des objets metiers Jour
         j1 = new Jour(2014, 1);
         j2 = new Jour(2014, 2);
