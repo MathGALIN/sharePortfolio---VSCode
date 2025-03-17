@@ -1,4 +1,4 @@
-Membre du groupe:\n
+Membre du groupe <br>
 SONG WENYI
 YAN Yuan
 LYU Jitian
