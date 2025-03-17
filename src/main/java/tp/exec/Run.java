@@ -15,11 +15,11 @@
  */
 package tp.exec;
 
-import tp_04.metier.Action;
-import tp_04.metier.ActionComposee;
-import tp_04.metier.ActionSimple;
-import tp_04.metier.Jour;
-import tp_04.metier.Portefeuille;
+import tp.metier.Action;
+import tp.metier.ActionComposee;
+import tp.metier.ActionSimple;
+import tp.metier.Jour;
+import tp.metier.Portefeuille;
 
 public class Run {
 
@@ -28,7 +28,6 @@ public class Run {
         ActionComposee bqAss;
         Jour j1, j2;
 
-        
         // init des objets metiers Jour
         j1 = new Jour(2014, 1);
         j2 = new Jour(2014, 2);
@@ -40,7 +39,7 @@ public class Run {
         // enrg de la composition de l'action composée
         bqAss.enrgComposition(axa, 0.3f);
         bqAss.enrgComposition(bnp, 0.7f);
-        // enrg. de 2 cours pour chaque action 
+        // enrg. de 2 cours pour chaque action
         axa.enrgCours(j1, 200);
         axa.enrgCours(j2, 250);
         bnp.enrgCours(j1, 100);
@@ -68,7 +67,7 @@ public class Run {
         System.out.println("Portefeuille : " + p);
         p.vendre(bnp, 50);
         System.out.println("Portefeuille : " + p);
- 
+
     }
 
 }
