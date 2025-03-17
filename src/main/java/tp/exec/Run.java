@@ -15,11 +15,11 @@
  */
 package tp.exec;
 
-import tp_04.metier.Action;
-import tp_04.metier.ActionComposee;
-import tp_04.metier.ActionSimple;
-import tp_04.metier.Jour;
-import tp_04.metier.Portefeuille;
+import tp.metier.Action;
+import tp.metier.ActionComposee;
+import tp.metier.ActionSimple;
+import tp.metier.Jour;
+import tp.metier.Portefeuille;
 
 public class Run {
 
