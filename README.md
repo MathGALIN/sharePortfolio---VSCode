@@ -7,4 +7,5 @@ Membre du groupe : <br>
 - MAMAN BOUBE Abdoul Rachid <br>
 
 
-lien sonarQube: https://sonarcloud.io/summary/overall?id=MathGALIN_sharePortfolio---VSCode&branch=main
+lien sonarQube: <br>
+https://sonarcloud.io/summary/overall?id=MathGALIN_sharePortfolio---VSCode&branch=main
