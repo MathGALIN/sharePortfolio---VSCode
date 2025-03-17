@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class ActionComposee extends Action {
 
     public ActionComposee(String libelle) {
         super(libelle);
-        this.mapPanier = new HashMap();
+        this.mapPanier = new HashMap<>();
     }
 
     public void enrgComposition(ActionSimple as, float pourcentage) {
@@ -40,11 +40,33 @@ public class ActionComposee extends Action {
         float valeur;
 
         valeur = 0;
-        for (ActionSimple as : this.mapPanier.keySet()) {
-            valeur = valeur + (as.valeur(j) * this.mapPanier.get(as));
-        }
+
+        for (Map.Entry<ActionSimple, Float> entry : this.mapPanier.entrySet()) {
+            ActionSimple as = entry.getKey();
+            Float mapValue = entry.getValue();
+            valeur = valeur + (as.valeur(j) * mapValue);
+        }         
 
         return valeur;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ActionComposee)) {
+            return false;
+        }
+        ActionComposee other = (ActionComposee) obj;
+        return super.equals(other) && 
+               this.mapPanier.equals(other.mapPanier);
+    }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 31 + mapPanier.hashCode();
+    }
+    
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,18 +32,19 @@ public class ActionSimple extends Action {
         // Action simple initialisée comme 1 action
         super(libelle);
         // init spécifique
-        this.mapCours = new HashMap();
+        this.mapCours = new HashMap<>();
     }
 
     // enrg possible si pas de cours pour ce jour
     public void enrgCours(Jour j, float v) {
-        if (this.mapCours.containsKey(j) == false)
-            this.mapCours.put(j, new Cours(j, v));
+
+        this.mapCours.computeIfAbsent(j, key -> new Cours(key, v));
+    
     }
 
     @Override
     public float valeur(Jour j) {
-        if (this.mapCours.containsKey(j) == true)
+        if (this.mapCours.containsKey(j))
             return this.mapCours.get(j).getValeur();
         else
             return 0; // definition d'une constante possible
@@ -70,4 +71,32 @@ public class ActionSimple extends Action {
         }
 
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((mapCours == null) ? 0 : mapCours.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ActionSimple other = (ActionSimple) obj;
+        if (mapCours == null) {
+            if (other.mapCours != null)
+                return false;
+        } else if (!mapCours.equals(other.mapCours))
+            return false;
+        return true;
+    }
+
+
+    
 }

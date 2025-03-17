@@ -13,37 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
-
-import java.util.Objects;
+package tp.metier;
 
 /**
  *
  * @author perussel
  */
-public abstract class Action {
+public class Jour {
 
-    private String libelle;
+    private int annee;
+    private int noJour;
 
     /**
-     * Get the value of libelle
+     * Get the value of annee
      *
-     * @return the value of libelle
+     * @return the value of annee
      */
-    public String getLibelle() {
-        return libelle;
+    public int getAnnee() {
+        return annee;
     }
 
-    public Action(String libelle) {
-        this.libelle = libelle;
+    /**
+     * Get the value of noJour
+     *
+     * @return the value of noJour
+     */
+    public int getNoJour() {
+        return noJour;
     }
 
-    public abstract float valeur(Jour j);
+    public Jour(int annee, int noJour) {
+        this.annee = annee;
+        this.noJour = noJour;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.libelle);
+        int hash = 7;
+        hash = 61 * hash + this.annee;
+        hash = 61 * hash + this.noJour;
         return hash;
     }
 
@@ -55,14 +63,11 @@ public abstract class Action {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Action other = (Action) obj;
-        if (!Objects.equals(this.libelle, other.libelle)) {
+        final Jour other = (Jour) obj;
+        if (this.annee != other.annee) {
             return false;
         }
-        return true;
+        return this.noJour != other.noJour;
     }
 
-    public String toString() {
-        return this.getLibelle();
-    }
 }

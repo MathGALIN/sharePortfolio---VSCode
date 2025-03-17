@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.exec;
+package tp.exec;
 
-import tp04.metier.Action;
-import tp04.metier.ActionComposee;
-import tp04.metier.ActionSimple;
-import tp04.metier.Jour;
-import tp04.metier.Portefeuille;
+import tp_04.metier.Action;
+import tp_04.metier.ActionComposee;
+import tp_04.metier.ActionSimple;
+import tp_04.metier.Jour;
+import tp_04.metier.Portefeuille;
 
 public class Run {
 

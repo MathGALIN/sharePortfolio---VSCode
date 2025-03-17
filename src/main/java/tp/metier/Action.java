@@ -13,64 +13,57 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
+
+import java.util.Objects;
 
 /**
  *
  * @author perussel
  */
-public class Jour {
+public abstract class Action {
 
-    private int annee;
-    private int noJour;
-
-    /**
-     * Get the value of annee
-     *
-     * @return the value of annee
-     */
-    public int getAnnee() {
-        return annee;
-    }
+    private String libelle;
 
     /**
-     * Get the value of noJour
+     * Get the value of libelle
      *
-     * @return the value of noJour
+     * @return the value of libelle
      */
-    public int getNoJour() {
-        return noJour;
+    public String getLibelle() {
+        return libelle;
     }
 
-    public Jour(int annee, int noJour) {
-        this.annee = annee;
-        this.noJour = noJour;
+    protected Action(String libelle) {
+        this.libelle = libelle;
     }
+
+    public abstract float valeur(Jour j);
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.annee;
-        hash = 61 * hash + this.noJour;
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.libelle);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        
+
         if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Jour other = (Jour) obj;
-        if (this.annee != other.annee) {
-            return false;
-        }
-        if (this.noJour != other.noJour) {
-            return false;
-        }
-        return true;
+
+        final Action other = (Action) obj;
+        return Objects.equals(this.libelle, other.libelle);
+        
     }
 
+    public String toString() {
+        return this.getLibelle();
+    }
 }
