@@ -1,3 +1,10 @@
-https://github.com/MathGALIN/sharePortfolio---VSCode
+Membre du groupe:
+SONG WENYI
+YAN Yuan
+LYU Jitian
+GALINIER Mathieu
+Ny Havatiana RATSARAMIAFARA
+MAMAN BOUBE Abdoul Rachid
 
-https://sonarcloud.io/summary/overall?id=MathGALIN_sharePortfolio---VSCode&branch=main
+
+lien sonarQube: https://sonarcloud.io/summary/overall?id=MathGALIN_sharePortfolio---VSCode&branch=main
