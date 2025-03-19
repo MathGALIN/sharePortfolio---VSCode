@@ -15,7 +15,6 @@
  */
 package tp.exec;
 
-import tp.metier.Action;
 import tp.metier.ActionComposee;
 import tp.metier.ActionSimple;
 import tp.metier.Jour;
@@ -24,9 +23,17 @@ import tp.metier.Portefeuille;
 public class Run {
 
     public static void main(String[] args) {
-        ActionSimple bnp, axa;
+        
+        //Création des actions simples
+        ActionSimple bnp;
+        ActionSimple axa;
+        
+        //Création des actions composés
         ActionComposee bqAss;
-        Jour j1, j2;
+
+        //Création des jours
+        Jour j1;
+        Jour j2;
 
         
         // init des objets metiers Jour
@@ -37,18 +44,22 @@ public class Run {
         bnp = new ActionSimple("BNP");
         axa = new ActionSimple("AXA");
         bqAss = new ActionComposee("Banque-Assurance");
+        
         // enrg de la composition de l'action composée
         bqAss.enrgComposition(axa, 0.3f);
         bqAss.enrgComposition(bnp, 0.7f);
+        
         // enrg. de 2 cours pour chaque action 
         axa.enrgCours(j1, 200);
         axa.enrgCours(j2, 250);
         bnp.enrgCours(j1, 100);
         bnp.enrgCours(j2, 200);
+        
         // affichage des cours - comme 1 action simple et 1 action
         System.out.println("Action simple *bnp* à j1 : " + bnp.valeur(j1));
         System.out.println("Action *Banque-Assurance* à j2 : " + bqAss.valeur(j2));
 
+        //Création du portefeuille et action sur le portefeuille
         Portefeuille p;
         p = new Portefeuille();
         p.acheter(axa, 10);
