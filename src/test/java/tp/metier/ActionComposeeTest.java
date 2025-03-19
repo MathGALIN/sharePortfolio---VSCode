@@ -19,10 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import tp.metier.ActionComposee;
-import tp.metier.ActionSimple;
-import tp.metier.Jour;
-
 /**
  *
  * @author David Navarre &lt;David.Navarre at irit.fr&gt;

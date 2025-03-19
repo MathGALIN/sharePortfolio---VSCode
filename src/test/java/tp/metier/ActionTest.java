@@ -18,9 +18,6 @@ package tp.metier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import tp.metier.Action;
-import tp.metier.Jour;
-
 /**
  *
  * @author David Navarre &lt;David.Navarre at irit.fr&gt;
