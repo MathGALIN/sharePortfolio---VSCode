@@ -16,10 +16,8 @@
 package tp.metier;
 
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-
-import tp.metier.Action;
-import tp.metier.Jour;
 
 /**
  *
@@ -42,6 +40,16 @@ class ActionTest {
         public float valeur(Jour j) {
             return 0.0F;
         }
+    }
+
+    @Test
+    public void testValeurAvecCoursExistant() {
+        ActionSimple action = new ActionSimple("ActionTest");
+        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+        action.enrgCours(jour, 100.0f);
+
+        float valeur = action.valeur(jour);
+        assertEquals(100.0f, valeur, 0.001f);
     }
 
 }
