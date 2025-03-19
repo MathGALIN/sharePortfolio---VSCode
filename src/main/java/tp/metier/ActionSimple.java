@@ -43,6 +43,7 @@ public class ActionSimple extends Action {
     }
 
     @Override
+    //Permet d'obtenir la valeur d'une action pour un jour j
     public float valeur(Jour j) {
         if (this.mapCours.containsKey(j))
             return this.mapCours.get(j).getValeur();
@@ -73,6 +74,7 @@ public class ActionSimple extends Action {
     }
 
     @Override
+    //Permet d'obtenir le hashcode d'une fonction simple
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
@@ -81,6 +83,7 @@ public class ActionSimple extends Action {
     }
 
     @Override
+    //Permet de savoir si deux actions simples sont égales
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
