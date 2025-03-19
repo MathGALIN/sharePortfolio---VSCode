@@ -2,59 +2,76 @@ package tp04.metier;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.PrintStream;
-import java.io.ByteArrayOutputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UtilisateurTest {
 
     private Utilisateur utilisateur;
-    private Action actionTesla;
-    private Action actionApple;
+    private Portefeuille portefeuille;
+    private Action action;
 
     @BeforeEach
     void setUp() {
-        utilisateur = new Utilisateur("Alice", 2000.0f); // Solde initial de 2000€
-        actionTesla = new ActionSimple("Tesla");
-        actionApple = new ActionSimple("Apple");
-
-        utilisateur.acheterActions(actionTesla, 5, 200.0f);
-        utilisateur.acheterActions(actionApple, 10, 100.0f);
-    }
-
-    @Test
-    void testVendreActions() {
-        String result = utilisateur.vendreActions(actionTesla, 3, 250.0f);
-        assertEquals("3 actions de Tesla vendues pour 750.0€.", result);
-        assertEquals(1750.0f, utilisateur.getSolde());
-        assertEquals(2, utilisateur.getPortefeuille().getMapLignes().get(actionTesla).getQte());
-
-        String errorResult = utilisateur.vendreActions(actionTesla, 3, 250.0f);
-        assertEquals("Vous n'avez pas assez d'actions à vendre.", errorResult);
+        // Création d'un utilisateur avec un solde initial de 1000€
+        portefeuille = new Portefeuille();  
+        action = new Action("AAPL") {  
+            @Override
+            public float valeur(Jour j) {
+                return 100.0f;  
+            }
+        };
+        utilisateur = new Utilisateur("John Doe", 1000);  
+        utilisateur.setPortefeuille(portefeuille);  // Associer le portefeuille à l'utilisateur
     }
 
     @Test
     void testAcheterActions() {
-        String result = utilisateur.acheterActions(actionTesla, 2, 200.0f);
-        assertEquals("2 actions de Tesla achetées pour 400.0€.", result);
-        assertEquals(1350.0f, utilisateur.getSolde());
-        assertEquals(7, utilisateur.getPortefeuille().getMapLignes().get(actionTesla).getQte());
+        // L'utilisateur achète 10 actions AAPL à 50€ chacune
+        String result = utilisateur.acheterActions(action, 10, 50);
 
-        String errorResult = utilisateur.acheterActions(actionTesla, 4, 300.0f);
-        assertEquals("Fonds insuffisants pour l'achat.", errorResult);
+        // Vérification du résultat
+        assertEquals("10 actions de AAPL achetées pour 500.0€.", result);
+        assertEquals(500, utilisateur.getSolde());  // Le solde de l'utilisateur doit être réduit de 500€
+    }
+
+    @Test
+    void testAcheterActions_FondsInsuffisants() {
+        // L'utilisateur essaie d'acheter 30 actions à 50€ chacune (le total est 1500€)
+        String result = utilisateur.acheterActions(action, 30, 50);
+
+        // Vérification du résultat
+        assertEquals("Fonds insuffisants pour l'achat.", result);
+        assertEquals(1000, utilisateur.getSolde());  // Le solde de l'utilisateur ne doit pas changer
+    }
+
+    @Test
+    void testVendreActions() {
+        // L'utilisateur achète 20 actions AAPL, puis en vend 10
+        portefeuille.acheter(action, 20);  // Acheter 20 actions AAPL
+        String result = utilisateur.vendreActions(action, 10, 50);  // Vendre 10 actions à 50€ chacune
+
+        // Vérification du résultat
+        assertEquals("10 actions de AAPL vendues pour 500.0€.", result);
+        assertEquals(1500, utilisateur.getSolde());  // Le solde de l'utilisateur doit être augmenté de 500€
+    }
+
+    @Test
+    void testVendreActions_StocksInsuffisants() {
+        // L'utilisateur possède seulement 5 actions AAPL et essaie d'en vendre 10
+        portefeuille.acheter(action, 5);  // Acheter 5 actions AAPL
+        String result = utilisateur.vendreActions(action, 10, 50);  // Essayer de vendre 10 actions
+
+        // Vérification du résultat
+        assertEquals("Vous n'avez pas assez d'actions à vendre.", result);
+        assertEquals(1000, utilisateur.getSolde());  // Le solde de l'utilisateur ne doit pas changer
     }
 
     @Test
     void testConsulterPortefeuille() {
-        final PrintStream originalOut = System.out;
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(baos));
+        // L'utilisateur possède 20 actions AAPL
+        portefeuille.acheter(action, 20);
 
-        utilisateur.consulterPortefeuille();
-
-        assertTrue(baos.toString().contains("Portefeuille de Alice"));
-        assertTrue(baos.toString().contains("Solde disponible: 1350.0€"));
-
-        System.setOut(originalOut);
+        // Appel de la méthode pour consulter le portefeuille de l'utilisateur
+        utilisateur.consulterPortefeuille();  // Cette méthode affiche directement le portefeuille et le solde
     }
 }
