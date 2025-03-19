@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 class ActionSimpleTest {
 
     @Test
-    void testValeurActionComposee() {
+    void testActionSimple() {
         // Création d'un jour pour le test
         Jour dateTest = new Jour(2025, 4);
 
@@ -38,7 +38,7 @@ class ActionSimpleTest {
         action1.enrgCours(dateTest, 100.0f); // cours de 100 pour action1
         action2.enrgCours(dateTest, 200.0f); // cours de 200 pour action2
         
-        assertEquals(true, action1.equals(action2));
+        assertEquals(false, action1.equals(action2));
     }
 
 }
