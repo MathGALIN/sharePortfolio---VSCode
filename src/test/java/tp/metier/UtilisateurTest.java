@@ -1,4 +1,4 @@
-package tp;
+package tp.metier;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
