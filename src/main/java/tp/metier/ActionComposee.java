@@ -26,16 +26,19 @@ public class ActionComposee extends Action {
     // attribut lien
     Map<ActionSimple, Float> mapPanier;
 
+    //Constructeur pour créer une action composé
     public ActionComposee(String libelle) {
         super(libelle);
         this.mapPanier = new HashMap<>();
     }
 
+    //Fonction pour enregistrer une action dans l'action composé
     public void enrgComposition(ActionSimple as, float pourcentage) {
         this.mapPanier.put(as, pourcentage);
     }
 
     @Override
+    //Permet d'obtenir la valeur de l'action composé pour un jour j
     public float valeur(Jour j) {
         float valeur;
 
@@ -51,6 +54,7 @@ public class ActionComposee extends Action {
     }
 
     @Override
+    //Permet de savoir si deux actions composés sont les mêmes
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -64,6 +68,7 @@ public class ActionComposee extends Action {
     }
     
     @Override
+    //Permet d'obtenir le hash d'une action composé
     public int hashCode() {
         return super.hashCode() * 31 + mapPanier.hashCode();
     }

@@ -24,40 +24,49 @@ import java.util.Map;
  */
 public class Portefeuille {
 
+    //Attribut des lignes d'action du portefeuille de l'utilisateur
     Map<Action, LignePortefeuille> mapLignes;
 
+    //Classe interne correspondant au ligne du portefeuille
     private class LignePortefeuille {
 
+        //Attribut, action, quantite
         private Action action;
-
         private int qte;
 
+        //Retourne la quantite
         public int getQte() {
             return qte;
         }
 
+        //Définit la quantite
         public void setQte(int qte) {
             this.qte = qte;
         }
 
+        //Renvoie une action
         public Action getAction() {
             return this.action;
         }
 
+        //Crée la ligne du portefeuille
         public LignePortefeuille(Action action, int qte) {
             this.action = action;
             this.qte = qte;
         }
 
+        //Renvoie la ligne au format string
         public String toString() {
             return Integer.toString(qte);
         }
     }
 
+    //Constructeur du portefeuille
     public Portefeuille() {
         this.mapLignes = new HashMap<>();
     }
 
+    //Permet d'acheter une quantite action
     public void acheter(Action a, int q) {
         if (!this.mapLignes.containsKey(a)) {
             this.mapLignes.put(a, new LignePortefeuille(a, q));
@@ -66,6 +75,7 @@ public class Portefeuille {
         }
     }
 
+    //Permet de vendre une quantite d'action
     public void vendre(Action a, int q) {
         if (this.mapLignes.containsKey(a)) {
             if (this.mapLignes.get(a).getQte() > q) {
@@ -76,10 +86,12 @@ public class Portefeuille {
         }
     }
 
+    //Renvoie le portefeuille au format string
     public String toString() {
         return this.mapLignes.toString();
     }
 
+    //Renvoie la valeur du jour j
     public float valeur(Jour j) {
         float total = 0;
         for (LignePortefeuille lp : this.mapLignes.values()) {

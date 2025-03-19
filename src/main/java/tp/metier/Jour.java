@@ -21,6 +21,7 @@ package tp.metier;
  */
 public class Jour {
 
+    //Attribut, numéro du jour et annee
     private int annee;
     private int noJour;
 
@@ -42,12 +43,14 @@ public class Jour {
         return noJour;
     }
 
+    //Constructeur
     public Jour(int annee, int noJour) {
         this.annee = annee;
         this.noJour = noJour;
     }
 
     @Override
+    //Renvoie le hash du jour
     public int hashCode() {
         int hash = 7;
         hash = 61 * hash + this.annee;
@@ -56,6 +59,7 @@ public class Jour {
     }
 
     @Override
+    //Permet de savoir si deux jours sont les mêmes
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

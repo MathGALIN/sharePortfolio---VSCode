@@ -18,8 +18,8 @@ package tp.metier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import tp_04.metier.Action;
-import tp_04.metier.Jour;
+import tp.metier.Action;
+import tp.metier.Jour;
 
 /**
  *

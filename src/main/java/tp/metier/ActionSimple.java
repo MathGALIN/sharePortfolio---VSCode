@@ -43,6 +43,7 @@ public class ActionSimple extends Action {
     }
 
     @Override
+    //Permet d'obtenir la valeur d'une action pour un jour j
     public float valeur(Jour j) {
         if (this.mapCours.containsKey(j))
             return this.mapCours.get(j).getValeur();
@@ -53,18 +54,21 @@ public class ActionSimple extends Action {
     // encapsulation de la définition de la classe Cours
     private class Cours {
 
+        //Attribut jour, valeur
         private Jour jour;
-
         private float valeur;
 
+        //Renvoie la valeur
         public float getValeur() {
             return valeur;
         }
 
+        //Renvoie le jour
         public Jour getJour() {
             return jour;
         }
 
+        //Permet de crée le cours
         public Cours(Jour jour, float valeur) {
             this.jour = jour;
             this.valeur = valeur;
@@ -73,6 +77,7 @@ public class ActionSimple extends Action {
     }
 
     @Override
+    //Permet d'obtenir le hashcode d'une fonction simple
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
@@ -81,6 +86,7 @@ public class ActionSimple extends Action {
     }
 
     @Override
+    //Permet de savoir si deux actions simples sont égales
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
