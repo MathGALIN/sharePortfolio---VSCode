@@ -54,18 +54,21 @@ public class ActionSimple extends Action {
     // encapsulation de la définition de la classe Cours
     private class Cours {
 
+        //Attribut jour, valeur
         private Jour jour;
-
         private float valeur;
 
+        //Renvoie la valeur
         public float getValeur() {
             return valeur;
         }
 
+        //Renvoie le jour
         public Jour getJour() {
             return jour;
         }
 
+        //Permet de crée le cours
         public Cours(Jour jour, float valeur) {
             this.jour = jour;
             this.valeur = valeur;
