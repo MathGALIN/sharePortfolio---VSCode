@@ -28,7 +28,7 @@ public class Portefeuille {
     Map<Action, LignePortefeuille> mapLignes;
 
     //Classe interne correspondant au ligne du portefeuille
-    private class LignePortefeuille {
+    public class LignePortefeuille {
 
         //Attribut, action, quantite
         private Action action;
@@ -99,4 +99,10 @@ public class Portefeuille {
         }
         return total;
     }
+
+    //Récupéraion des informations des lignes
+    public Map<Action, LignePortefeuille> getMapLignes() {
+        return mapLignes;
+    }
+
 }
