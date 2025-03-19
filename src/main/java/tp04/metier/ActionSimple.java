@@ -41,6 +41,16 @@ public class ActionSimple extends Action {
             this.mapCours.put(j, new Cours(j, v));
     }
 
+     /**
+     * Ajoute ou met à jour un cours pour une journée donnée.
+     *
+     * @param j   Le jour du cours.
+     * @param v   La valeur de l'action pour ce jour.
+     */
+    public void mettreAJourCours(Jour j, float v) {
+        this.mapCours.put(j, new Cours(j, v)); // Mise à jour ou ajout
+    }
+
     @Override
     public float valeur(Jour j) {
         if (this.mapCours.containsKey(j) == true)
@@ -48,6 +58,8 @@ public class ActionSimple extends Action {
         else
             return 0; // definition d'une constante possible
     }
+
+   
 
     // encapsulation de la définition de la classe Cours
     private class Cours {

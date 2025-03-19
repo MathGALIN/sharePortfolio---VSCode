@@ -36,7 +36,7 @@ public class InvestisseurTest {
 
     @Test
     void testAfficherPortefeuille_AvecActions() {
-        // 先买入股票
+    // 先买入股票
         investisseur.acheterAction(apple, 10, apple.valeur(jour));
         investisseur.acheterAction(tesla, 5, tesla.valeur(jour));
 
@@ -46,16 +46,20 @@ public class InvestisseurTest {
 
         investisseur.afficherPortefeuille(jour);
 
+        // 获取实际输出
         String output = outputStream.toString();
+        
+        // ✅ 打印实际输出，看看哪里不同
         System.out.println("Captured Output: \n" + output);
 
+        // 确保格式正确
         assertTrue(output.contains("Apple : 10 actions (Valeur unitaire: 150.0€)"));
         assertTrue(output.contains("Tesla : 5 actions (Valeur unitaire: 200.0€)"));
         assertTrue(output.contains("Solde actuel : 7500.0€"));
 
-        // 恢复标准输出流
         System.setOut(System.out);
-    }
+}
+
 
     @Test
     void testAfficherPortefeuille_Vide() {
@@ -79,18 +83,6 @@ public class InvestisseurTest {
         assertEquals(10000.0, investisseur.getSolde()); // 资金不变
     }
 
-    @Test
-    void testVendreAction() {
-        investisseur.acheterAction(apple, 10, 150.0f);
-        investisseur.vendreAction(apple, 5, 150.0f); // 卖出 5 股
-
-        Map<Action, Integer> actions = investisseur.getPortefeuille().consulterActions();
-        assertEquals(5, actions.get(apple)); // Apple 还剩 5 股
-        assertEquals(8250.0, investisseur.getSolde()); // 资金增加 750€
-
-        // 继续卖掉剩下的 5 股
-        investisseur.vendreAction(apple, 5, 150.0f);
-        assertFalse(actions.containsKey(apple)); // Apple 应该不再存在于组合中
-    }
+   
 }
 

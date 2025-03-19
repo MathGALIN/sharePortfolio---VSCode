@@ -2,6 +2,8 @@ package tp04.metier;
 
 import java.util.Map;
 
+import tp04.metier.Portefeuille.LignePortefeuille;
+
 public class Investisseur extends Acteur{
     private double solde;
     private Portefeuille portefeuille;
@@ -38,39 +40,37 @@ public class Investisseur extends Acteur{
     }
 
     public void vendreAction(Action action, int quantite, float prixUnitaire) {
-        if (portefeuille.consulterActions().containsKey(action)) {
-            int quantiteActuelle = portefeuille.consulterActions().get(action);
-            if (quantiteActuelle >= quantite) {
-                portefeuille.vendre(action, quantite);
-                solde += quantite * prixUnitaire;  // ✅ 资金增加
-                System.out.printf("%s a vendu %d actions de %s pour %.1f€\n",
-                    nom, quantite, action.getLibelle(), (quantite * prixUnitaire));
-            } else {
-                System.out.println("Quantité insuffisante pour vendre !");
-            }
+        float montantVente = portefeuille.vendre(action, quantite, prixUnitaire);
+        if (montantVente > 0) {
+            this.solde += montantVente;  // ✅ 确保 `solde` 正确增加
+            System.out.printf("%s a vendu %d actions de %s pour %.2f€\n", 
+                nom, quantite, action.getLibelle(), montantVente);
         } else {
-            System.out.println("Aucune action à vendre !");
+            System.out.println("Vente échouée : vous ne possédez pas cette action ou quantité insuffisante.");
+        }
+    }
+    
+    
+    public void afficherPortefeuille(Jour j) {
+        System.out.println("\n=== Portefeuille de " + nom + " ===");
+    
+        Map<Action, LignePortefeuille> actions = portefeuille.getMapLignes();  // ✅ 通过 get 方法访问
+    
+        if (actions.isEmpty()) {
+            System.out.println("Votre portefeuille est vide.");
+        } else {
+            for (Map.Entry<Action, LignePortefeuille> entry : actions.entrySet()) {
+                Action action = entry.getKey();
+                int quantite = entry.getValue().getQte();
+                float prix = action.valeur(j);
+    
+                System.out.printf("%s : %d actions (Valeur unitaire: %.2f)\n", 
+                    action.getLibelle(), quantite, prix);
+            }
         }
     }
     
 
-
-    public void afficherPortefeuille(Jour jour) {
-        System.out.println("\n=== Portefeuille de " + nom + " ===");
-    
-        if (portefeuille.consulterActions().isEmpty()) {
-            System.out.println("Votre portefeuille est vide.");
-        } else {
-            for (Map.Entry<Action, Portefeuille.LignePortefeuille> entry : portefeuille.getMapLignes().entrySet()) {
-                Action action = entry.getKey();
-                int quantite = entry.getValue().getQte();
-                float prix = action.valeur(jour);
-    
-                System.out.printf("%s : %d actions (Valeur unitaire: %.1f€)\n", action.getLibelle(), quantite, prix);
-            }
-        }
-        System.out.printf("Solde actuel : %.1f€\n", solde);
-    }    
     
 
 
