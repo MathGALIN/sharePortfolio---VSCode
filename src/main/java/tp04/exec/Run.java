@@ -18,6 +18,7 @@ package tp04.exec;
 import tp04.metier.Action;
 import tp04.metier.ActionComposee;
 import tp04.metier.ActionSimple;
+import tp04.metier.Investisseur;
 import tp04.metier.Jour;
 import tp04.metier.Portefeuille;
 
@@ -49,26 +50,18 @@ public class Run {
         System.out.println("Action simple *bnp* à j1 : " + bnp.valeur(j1));
         System.out.println("Action *Banque-Assurance* à j2 : " + bqAss.valeur(j2));
 
-        Portefeuille p;
-        p = new Portefeuille();
-        p.acheter(axa, 10);
-        System.out.println("Portefeuille : " + p);
-        p.acheter(bnp, 20);
-        System.out.println("Portefeuille : " + p);
-        p.acheter(bqAss, 5);
-        System.out.println("Portefeuille : " + p);
-        p.acheter(bqAss, 15);
-        System.out.println("Portefeuille : " + p);
-        System.out.println("Portefeuille à j1 : " + p.valeur(j1));
-        p.vendre(axa, 5);
-        System.out.println("Portefeuille : " + p);
-        p.vendre(axa, 5);
-        System.out.println("Portefeuille : " + p);
-        p.vendre(axa, 5);
-        System.out.println("Portefeuille : " + p);
-        p.vendre(bnp, 50);
-        System.out.println("Portefeuille : " + p);
+
+        Investisseur investisseur = new Investisseur(1, "Alice", 10000.0);
+        System.out.println("Investisseur créé : " + investisseur.getNom() + ", Solde initial : " + investisseur.getSolde() + "€");
+
+        
+        investisseur.acheterAction(bnp, 10, bnp.valeur(j1));
+        investisseur.acheterAction(axa, 10, axa.valeur(j1));
  
+
+        // 4️⃣ 显示投资组合内容
+        System.out.println("\n=== Affichage du Portefeuille ===");
+        investisseur.afficherPortefeuille(j1);
     }
 
 }

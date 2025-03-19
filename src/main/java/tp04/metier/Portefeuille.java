@@ -26,7 +26,7 @@ public class Portefeuille {
 
     Map<Action, LignePortefeuille> mapLignes;
 
-    private class LignePortefeuille {
+    public static class LignePortefeuille {
 
         private Action action;
 
@@ -58,6 +58,11 @@ public class Portefeuille {
         this.mapLignes = new HashMap();
     }
 
+    public Map<Action, LignePortefeuille> getMapLignes() {
+        return this.mapLignes;
+    }
+    
+
     public void acheter(Action a, int q) {
         if (this.mapLignes.containsKey(a) == false) {
             this.mapLignes.put(a, new LignePortefeuille(a, q));
@@ -75,6 +80,27 @@ public class Portefeuille {
             }
         }
     }
+
+    public Map<Action, Integer> consulterActions() {
+        Map<Action, Integer> result = new HashMap<>();
+        for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().getQte());
+        }
+        return result;
+    }
+
+    
+    public void afficherPortefeuille(Jour j) {
+        if (mapLignes.isEmpty()) {
+            System.out.println("Votre portefeuille est vide.");
+        } else {
+            System.out.println("Votre portefeuille contient :");
+            for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
+                System.out.println(entry.getKey().valeur(j) + " : " + entry.getValue().getQte() + " actions");
+            }
+        }
+    }
+    
 
     public String toString() {
         return this.mapLignes.toString();
