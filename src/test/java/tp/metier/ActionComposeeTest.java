@@ -56,4 +56,39 @@ class ActionComposeeTest {
                 "La valeur de l'action composée devrait être calculée correctement.");
     }
 
+    @Test
+    void testValeurActionComposeeMultipleActions() {
+        // Création d'un jour pour le test
+        Jour dateTest = new Jour(2025, 4);
+
+        // Création de trois actions simples
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Amazon");
+        ActionSimple action3 = new ActionSimple("Google");
+
+        // Enregistrement d'un cours pour chacune des actions simples pour le jour donné
+        action1.enrgCours(dateTest, 100.0f); // cours de 100 pour action1
+        action2.enrgCours(dateTest, 200.0f); // cours de 200 pour action2
+        action3.enrgCours(dateTest, 300.0f); // cours de 300 pour action3
+
+        // Création d'une action composée et définition de sa composition
+        ActionComposee actionComposee = new ActionComposee("Action Compose 2");
+
+        // Composition des actions avec des pourcentages différents
+        actionComposee.enrgComposition(action1, 0.3f); // 30 % de Tesla
+        actionComposee.enrgComposition(action2, 0.4f); // 40 % d'Amazon
+        actionComposee.enrgComposition(action3, 0.3f); // 30 % de Google
+
+        // Calcul attendu : (100 * 0.3) + (200 * 0.4) + (300 * 0.3)
+        // = 30 + 80 + 90 = 200
+        float valeurAttendue = 200.0f;
+
+        // Récupération de la valeur calculée pour le jour donné
+        float valeurCalculee = actionComposee.valeur(dateTest);
+
+        // Vérification que la valeur calculée correspond à la valeur attendue
+        assertEquals(valeurAttendue, valeurCalculee, 0.001f,
+                "La valeur de l'action composée avec plusieurs actions devrait être calculée correctement.");
+    }
+
 }
