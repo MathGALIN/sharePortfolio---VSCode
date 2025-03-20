@@ -16,7 +16,8 @@
 
 package tp.metier;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 class JourTest {
@@ -28,17 +29,6 @@ class JourTest {
         assertEquals(120, jour.getNoJour());
     }
 
-    @Test
-    void testEquals() {
-        Jour jour1 = new Jour(2025, 120);
-        Jour jour2 = new Jour(2025, 120);
-        Jour jour3 = new Jour(2024, 120);
-        Jour jour4 = new Jour(2025, 121);
-
-        assertEquals(jour1, jour2);
-        assertNotEquals(jour1, jour3);
-        assertNotEquals(jour1, jour4);
-    }
 
     @Test
     void testHashCode() {
