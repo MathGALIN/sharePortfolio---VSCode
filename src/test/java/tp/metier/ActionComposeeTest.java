@@ -16,6 +16,7 @@
 package tp.metier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -91,4 +92,99 @@ class ActionComposeeTest {
                 "La valeur de l'action composée avec plusieurs actions devrait être calculée correctement.");
     }
 
+  @Test
+    void testEquals() {
+        // Create two action simples
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Amazon");
+
+        // Create two action composées
+        ActionComposee actionComposee1 = new ActionComposee("Action Compose 1");
+        ActionComposee actionComposee2 = new ActionComposee("Action Compose 1");
+
+        // Same composition for both
+        Jour dateTest = new Jour(2025, 4);
+        action1.enrgCours(dateTest, 100.0f);
+        action2.enrgCours(dateTest, 200.0f);
+
+        actionComposee1.enrgComposition(action1, 0.4f);
+        actionComposee1.enrgComposition(action2, 0.6f);
+        actionComposee2.enrgComposition(action1, 0.4f);
+        actionComposee2.enrgComposition(action2, 0.6f);
+
+        // Test that two equal ActionComposee objects are considered equal
+        assertEquals(actionComposee1, actionComposee2, "Les objets ActionComposee devraient être égaux.");
+    }
+
+    @Test
+    void testEqualsDifferent() {
+        // Create two action simples
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Amazon");
+
+        // Create two action composées with different compositions
+        ActionComposee actionComposee1 = new ActionComposee("Action Compose 1");
+        ActionComposee actionComposee2 = new ActionComposee("Action Compose 2");
+
+        Jour dateTest = new Jour(2025, 4);
+        action1.enrgCours(dateTest, 100.0f);
+        action2.enrgCours(dateTest, 200.0f);
+
+        actionComposee1.enrgComposition(action1, 0.4f);
+        actionComposee1.enrgComposition(action2, 0.6f);
+        actionComposee2.enrgComposition(action2, 0.5f);
+        actionComposee2.enrgComposition(action1, 0.5f);
+
+        // Test that two different ActionComposee objects are considered not equal
+        assertNotEquals(actionComposee1, actionComposee2, "Les objets ActionComposee devraient être différents.");
+    }
+
+    @Test
+    void testHashCode() {
+        // Create two action simples
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Amazon");
+
+        // Create two action composées
+        ActionComposee actionComposee1 = new ActionComposee("Action Compose 1");
+        ActionComposee actionComposee2 = new ActionComposee("Action Compose 1");
+
+        // Same composition for both
+        Jour dateTest = new Jour(2025, 4);
+        action1.enrgCours(dateTest, 100.0f);
+        action2.enrgCours(dateTest, 200.0f);
+
+        actionComposee1.enrgComposition(action1, 0.4f);
+        actionComposee1.enrgComposition(action2, 0.6f);
+        actionComposee2.enrgComposition(action1, 0.4f);
+        actionComposee2.enrgComposition(action2, 0.6f);
+
+        // Test that the hash codes for two equal objects are the same
+        assertEquals(actionComposee1.hashCode(), actionComposee2.hashCode(),
+                "Les hash codes des objets ActionComposee égaux devraient être identiques.");
+    }
+
+    @Test
+    void testHashCodeDifferent() {
+        // Create two action simples
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Amazon");
+
+        // Create two action composées with different compositions
+        ActionComposee actionComposee1 = new ActionComposee("Action Compose 1");
+        ActionComposee actionComposee2 = new ActionComposee("Action Compose 2");
+
+        Jour dateTest = new Jour(2025, 4);
+        action1.enrgCours(dateTest, 100.0f);
+        action2.enrgCours(dateTest, 200.0f);
+
+        actionComposee1.enrgComposition(action1, 0.4f);
+        actionComposee1.enrgComposition(action2, 0.6f);
+        actionComposee2.enrgComposition(action2, 0.5f);
+        actionComposee2.enrgComposition(action1, 0.5f);
+
+        // Test that hash codes for different objects are not the same
+        assertNotEquals(actionComposee1.hashCode(), actionComposee2.hashCode(),
+                "Les hash codes des objets ActionComposee différents ne devraient pas être identiques.");
+    }
 }
