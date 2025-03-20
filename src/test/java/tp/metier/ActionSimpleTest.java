@@ -16,6 +16,9 @@
 package tp.metier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +42,45 @@ class ActionSimpleTest {
         action2.enrgCours(dateTest, 200.0f); // cours de 200 pour action2
         
         assertEquals(false, action1.equals(action2));
+    }
+
+
+    @Test
+    void testHashCode() {
+        // Création de deux actions simples avec le même nom
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Tesla");
+
+        // On vérifie que deux actions avec le même nom ont le même hashCode
+        assertEquals(action1.hashCode(), action2.hashCode());
+
+        // Création d'une autre action avec un nom différent
+        ActionSimple action3 = new ActionSimple("Amazon");
+
+        // On vérifie que deux actions avec des noms différents ont des hashCode différents
+        assertNotEquals(action1.hashCode(), action3.hashCode());
+    }
+
+    @Test
+    void testEquals() {
+        // Création de deux actions simples avec le même nom
+        ActionSimple action1 = new ActionSimple("Tesla");
+        ActionSimple action2 = new ActionSimple("Tesla");
+
+        // On vérifie que deux actions avec le même nom sont égales
+        assertTrue(action1.equals(action2));
+
+        // Création d'une autre action avec un nom différent
+        ActionSimple action3 = new ActionSimple("Amazon");
+
+        // On vérifie que deux actions avec des noms différents ne sont pas égales
+        assertFalse(action1.equals(action3));
+
+        // Test de l'égalité avec null (doit renvoyer false)
+        assertFalse(action1.equals(null));
+
+        // Test de l'égalité avec un objet d'un type différent (doit renvoyer false)
+        assertFalse(action1.equals(new Object()));
     }
 
 }
