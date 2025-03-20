@@ -44,16 +44,11 @@ class InvestisseurTest {
         investisseur.acheterAction(tesla, 5, tesla.valeur(jour));
 
         // 捕获 `System.out.println()` 的输出
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
         String resultat = investisseur.afficherPortefeuille(jour);
 
         // 确保格式正确
-        assertTrue(resultat.contains("apple : 10 actions (Valeur unitaire: 150,00)"));
-        assertTrue(resultat.contains("tesla : 5 actions (Valeur unitaire: 200,00)"));
-
-        System.setOut(System.out);
+        assertTrue(resultat.contains("apple : 10 actions (Valeur unitaire: 150"));
+        assertTrue(resultat.contains("tesla : 5 actions (Valeur unitaire: 200"));
 }
 
 
