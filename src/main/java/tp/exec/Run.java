@@ -15,68 +15,31 @@
  */
 package tp.exec;
 
-import tp.metier.ActionComposee;
-import tp.metier.ActionSimple;
-import tp.metier.Jour;
-import tp.metier.Portefeuille;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import tp.metier.*;
 
 public class Run {
 
     public static void main(String[] args) {
         
-        //Création des actions simples
-        ActionSimple bnp;
-        ActionSimple axa;
-        
-        //Création des actions composés
-        ActionComposee bqAss;
+        Investisseur investisseur = new Investisseur(1, "Alice", 10000.0); // 初始资金 10000€
+        ActionSimple apple = new ActionSimple("apple");
+        ActionSimple tesla = new ActionSimple("tesla");
+        Jour jour = new Jour(2024, 100); // 假设 2024 年第 100 天
 
-        //Création des jours
-        Jour j1;
-        Jour j2;
+        apple.enrgCours(jour, 150);
+        tesla.enrgCours(jour, 200);
 
-        // init des objets metiers Jour
-        j1 = new Jour(2014, 1);
-        j2 = new Jour(2014, 2);
+        investisseur.acheterAction(apple, 10, apple.valeur(jour));
+        investisseur.acheterAction(tesla, 5, tesla.valeur(jour));
 
-        // creation d'actions simples et composée
-        bnp = new ActionSimple("BNP");
-        axa = new ActionSimple("AXA");
-        bqAss = new ActionComposee("Banque-Assurance");
-        
-        // enrg de la composition de l'action composée
-        bqAss.enrgComposition(axa, 0.3f);
-        bqAss.enrgComposition(bnp, 0.7f);
-        // enrg. de 2 cours pour chaque action 
-        axa.enrgCours(j1, 200);
-        axa.enrgCours(j2, 250);
-        bnp.enrgCours(j1, 100);
-        bnp.enrgCours(j2, 200);
-        
-        // affichage des cours - comme 1 action simple et 1 action
-        System.out.println("Action simple *bnp* à j1 : " + bnp.valeur(j1));
-        System.out.println("Action *Banque-Assurance* à j2 : " + bqAss.valeur(j2));
 
-        //Création du portefeuille et action sur le portefeuille
-        Portefeuille p;
-        p = new Portefeuille();
-        p.acheter(axa, 10);
-        System.out.println("Portefeuille : " + p);
-        p.acheter(bnp, 20);
-        System.out.println("Portefeuille : " + p);
-        p.acheter(bqAss, 5);
-        System.out.println("Portefeuille : " + p);
-        p.acheter(bqAss, 15);
-        System.out.println("Portefeuille : " + p);
-        System.out.println("Portefeuille à j1 : " + p.valeur(j1));
-        p.vendre(axa, 5);
-        System.out.println("Portefeuille : " + p);
-        p.vendre(axa, 5);
-        System.out.println("Portefeuille : " + p);
-        p.vendre(axa, 5);
-        System.out.println("Portefeuille : " + p);
-        p.vendre(bnp, 50);
-        System.out.println("Portefeuille : " + p);
+
+        // 捕获 `System.out.println()` 的输出
+        System.out.println("Affichage : \n \n");
+        investisseur.afficherPortefeuille(jour);
 
     }
 
