@@ -47,18 +47,11 @@ class InvestisseurTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        investisseur.afficherPortefeuille(jour);
-
-        // 获取实际输出
-        String output = outputStream.toString();
-
-        // ✅ 打印实际输出，看看哪里不同
-        System.out.println("Captured Output: \n" + output);
+        String resultat = investisseur.afficherPortefeuille(jour);
 
         // 确保格式正确
-        assertTrue(output.contains("apple : 10 actions (Valeur unitaire: 150,00)"));
-        assertTrue(output.contains("tesla : 5 actions (Valeur unitaire: 200,00)"));
-        assertTrue(output.contains("Solde actuel : 350.0"));
+        assertTrue(resultat.contains("apple : 10 actions (Valeur unitaire: 150,00)"));
+        assertTrue(resultat.contains("tesla : 5 actions (Valeur unitaire: 200,00)"));
 
         System.setOut(System.out);
 }

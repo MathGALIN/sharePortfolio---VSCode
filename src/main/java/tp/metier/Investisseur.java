@@ -51,26 +51,31 @@ public class Investisseur extends Acteur {
     }
 
 
-    public void afficherPortefeuille(Jour j) {
-        System.out.println("\n=== Portefeuille de " + nom + " ===");
-
-        Map<Action, LignePortefeuille> actions = portefeuille.getMapLignes();  // ✅ 通过 get 方法访问
+    public String afficherPortefeuille(Jour j) {
+        StringBuilder output = new StringBuilder();
+        output.append("\n=== Portefeuille de ").append(nom).append(" ===\n");
+        
+        Map<Action, LignePortefeuille> actions = portefeuille.getMapLignes();
         float somme_prix = 0;
-
+        
         if (actions.isEmpty()) {
-            System.out.println("Votre portefeuille est vide.");
+            output.append("Votre portefeuille est vide.\n");
         } else {
             for (Map.Entry<Action, LignePortefeuille> entry : actions.entrySet()) {
                 Action action = entry.getKey();
                 int quantite = entry.getValue().getQte();
                 float prix = action.valeur(j);
-
-                System.out.printf("%s : %d actions (Valeur unitaire: %.2f)\n", 
-                    action.getLibelle(), quantite, prix);
-                    somme_prix += prix;
+                
+                output.append(String.format("%s : %d actions (Valeur unitaire: %.2f)\n", 
+                    action.getLibelle(), quantite, prix));
+                somme_prix += prix;
             }
-                System.out.printf("Solde actuel : "+somme_prix);
+            output.append(String.format("Solde actuel : %.2f\n", somme_prix));
         }
+        
+        String result = output.toString();
+        System.out.print(result);
+        return result;
     }
 
 

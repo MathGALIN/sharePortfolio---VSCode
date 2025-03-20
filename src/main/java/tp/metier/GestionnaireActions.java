@@ -23,33 +23,43 @@ public class GestionnaireActions {
     }
 
     /**
-     * Met à jour le prix d'une action à une date donnée.
+     * Met à jour le prix d'une action à une date donnée et retourne un message.
      *
      * @param libelle Le nom de l'action.
      * @param jour    Le jour de mise à jour.
      * @param prix    Le nouveau prix.
+     * @return Message confirmant la mise à jour du prix.
      */
-    public void mettreAJourPrix(String libelle, Jour jour, float prix) {
+    public String mettreAJourPrix(String libelle, Jour jour, float prix) {
         ActionSimple action = actions.get(libelle);
         if (action != null) {
             action.mettreAJourCours(jour, prix);
-            System.out.println("Prix mis à jour pour " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " à " + prix + ".");
+            String message = "Prix mis à jour pour " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " à " + prix + ".";
+            System.out.println(message);
+            return message;
         } else {
-            System.out.println("Action introuvable !");
+            String message = "Action introuvable !";
+            System.out.println(message);
+            return message;
         }
     }
 
     /**
-     * Affiche les prix d'une action donnée.
+     * Affiche et retourne le prix d'une action donnée.
      * @param libelle Le nom de l'action.
      * @param jour Le jour demandé.
+     * @return Message affichant le prix de l'action.
      */
-    public void afficherPrix(String libelle, Jour jour) {
+    public String afficherPrix(String libelle, Jour jour) {
         ActionSimple action = actions.get(libelle);
         if (action != null) {
-            System.out.println("Prix de " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " : " + action.valeur(jour) + ".");
+            String message = "Prix de " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " : " + action.valeur(jour) + ".";
+            System.out.println(message);
+            return message;
         } else {
-            System.out.println("Action introuvable !");
+            String message = "Action introuvable !";
+            System.out.println(message);
+            return message;
         }
     }
 }
