@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -82,5 +83,58 @@ class ActionSimpleTest {
         // Test de l'égalité avec un objet d'un type différent (doit renvoyer false)
         assertFalse(action1.equals(new Object()));
     }
+
+
+    @Test
+    void testGetLibelle() {
+        final Action action = new ActionImpl();
+        Assertions.assertNotNull(action.getLibelle());
+    }
+
+    @Test
+    void testValeurAvecCoursExistant() {
+        ActionSimple action = new ActionSimple("ActionTest");
+        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+        action.enrgCours(jour, 100.0f);
+
+        float valeur = action.valeur(jour);
+        assertEquals(100.0f, valeur, 0.001f);
+    }
+
+    @Test
+    void testValeurAvecCoursInexistant() {
+        ActionSimple action = new ActionSimple("ActionTest");
+        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+
+        float valeur = action.valeur(jour);
+        assertEquals(0.0f, valeur, 0.001f); // Devrait retourner 0 si pas de cours enregistré
+    }
+
+    @Test
+    void testMettreAJourCours() {
+        ActionSimple action = new ActionSimple("ActionTest");
+        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+
+        // Enregistrer un premier cours
+        action.enrgCours(jour, 100.0f);
+        assertEquals(100.0f, action.valeur(jour), 0.001f);
+
+        // Mettre à jour le cours
+        action.mettreAJourCours(jour, 150.0f);
+        assertEquals(150.0f, action.valeur(jour), 0.001f); // La valeur doit être mise à jour
+    }
+
+
+    public class ActionImpl extends Action {
+
+        public ActionImpl() {
+            super("");
+        }
+
+        public float valeur(Jour j) {
+            return 0.0F;
+        }
+    }
+
 
 }
