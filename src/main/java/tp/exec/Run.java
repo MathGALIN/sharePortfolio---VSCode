@@ -15,6 +15,10 @@
  */
 package tp.exec;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -24,22 +28,17 @@ public class Run {
 
     public static void main(String[] args) {
         
-        Investisseur investisseur = new Investisseur(1, "Alice", 10000.0); // 初始资金 10000€
-        ActionSimple apple = new ActionSimple("apple");
-        ActionSimple tesla = new ActionSimple("tesla");
-        Jour jour = new Jour(2024, 100); // 假设 2024 年第 100 天
+        Portefeuille portefeuille = new Portefeuille();
+        ActionSimple action1 = new ActionSimple("Action1");
+        Jour jour = new Jour(2025, 73);
 
-        apple.enrgCours(jour, 150);
-        tesla.enrgCours(jour, 200);
+        action1.enrgCours(jour, 10.0f);
 
-        investisseur.acheterAction(apple, 10, apple.valeur(jour));
-        investisseur.acheterAction(tesla, 5, tesla.valeur(jour));
+        portefeuille.acheter(action1, 5);
 
-
-
-        // 捕获 `System.out.println()` 的输出
-        System.out.println("Affichage : \n \n");
-        investisseur.afficherPortefeuille(jour);
+        // Capture the output using a print stream to verify afficherPortefeuille()
+        // This will print information about the portfolio
+        portefeuille.afficherPortefeuille(jour);
 
     }
 

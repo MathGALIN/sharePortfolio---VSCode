@@ -130,21 +130,31 @@ public class Portefeuille {
     }
 
 
-    public void afficherPortefeuille(Jour j) {
+    
+    public String afficherPortefeuille(Jour j) {
+        String portefeuilleInfo = ""; // Start with an empty string
+    
         if (mapLignes.isEmpty()) {
-            System.out.println("Votre portefeuille est vide.");
+            portefeuilleInfo += "Votre portefeuille est vide.\n";  // Concatenate string when portfolio is empty
         } else {
-            System.out.println("Votre portefeuille contient :");
+            portefeuilleInfo += "Votre portefeuille contient :\n";  // Indicate that the portfolio contains items
             for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
                 Action action = entry.getKey();
                 int quantite = entry.getValue().getQte();
                 float prix = action.valeur(j);
-
-                // ✅ 统一格式，避免格式匹配错误
-                System.out.printf("%s : %d actions (Valeur unitaire: %.1f€)\n", 
-                    action.getLibelle(), quantite, prix);
+    
+                // Concatenate each action's info to the string
+                portefeuilleInfo += String.format("%s : %d actions (Valeur unitaire: %.1f€)\n", 
+                        action.getLibelle(), quantite, prix);
             }
         }
-
+    
+        // Print the constructed string
+        System.out.print(portefeuilleInfo);
+    
+        // Return the string for further use
+        return portefeuilleInfo;
     }
+    
+
 }
