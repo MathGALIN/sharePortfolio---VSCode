@@ -81,7 +81,7 @@ public class Utilisateur {
 
         // Vérifie si l'utilisateur a suffisamment de fonds pour effectuer l'achat
         if (solde >= montantAchat) {
-            // Appelle la méthode acheter du portefeuille pour effectuer l'achat des actions
+        
             portefeuille.acheter(action, quantite);
 
             // Déduit le montant de l'achat du solde
