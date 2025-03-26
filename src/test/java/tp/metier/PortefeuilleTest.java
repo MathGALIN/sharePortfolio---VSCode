@@ -32,12 +32,12 @@
          Jour jour = new Jour(2025, 73);
  
          // Ajout de cours pour le jour donné
-         action1.enrgCours(jour, 10.0f);  // Action1 vaut 10,00 €
-         action2.enrgCours(jour, 20.0f);  // Action2 vaut 20,00 €
+         action1.enrgCours(jour, 10.0f);  // Action1 vaut 10,00
+         action2.enrgCours(jour, 20.0f);  // Action2 vaut 20,00
  
          // Ajout des actions
          portefeuille.acheter(action1, 5);  // Ajoute 5 unités de Action1
-         portefeuille.acheter(action1, 3);  // Ajoute 3 unités à Action1 (5 + 3 = 8)
+         portefeuille.acheter(action1, 3);  // Ajoute 3 unités à Action1
          portefeuille.acheter(action2, 3);  // Ajoute 3 unités de Action2
  
          // Vérification de la valeur totale avant ventes
@@ -82,7 +82,7 @@
          portefeuille.acheter(action1, 5);
          portefeuille.acheter(action2, 3);
  
-         // Test that the toString method correctly represents the portfolio
+         //Test que to string renvoie bien des informations valides
          String portefeuilleStr = portefeuille.toString();
          assertTrue(portefeuilleStr.contains("Action1"));
          assertTrue(portefeuilleStr.contains("Action2"));
@@ -100,16 +100,16 @@
  
          portefeuille.acheter(action1, 5);
  
-         // Sell 3 units, which should return 30 (3 * 10.0f)
+         //on vend 3 action donc sa nous fait 30 euros
          float montantVente = portefeuille.vendreUnitaire(action1, 3, 10.0f);
          assertEquals(30.0f, montantVente, 0.01f);
  
-         // Verify the remaining quantity of Action1 is 2
+         //on vérifie que la qantité à bel et bien diminué
          assertEquals(2, portefeuille.getMapLignes().get(action1).getQte());
  
-         // Test selling more than available, should return 0
+         //On teste qu'on ne peut pas vendre plus d'action qu'on en a
          montantVente = portefeuille.vendreUnitaire(action1, 10, 10.0f);
-         assertEquals(0.0f, montantVente, 0.01f); // No units left to sell
+         assertEquals(0.0f, montantVente, 0.01f); //Pas d'unité à vendre
      }
  
      @Test
@@ -122,9 +122,8 @@
  
          portefeuille.acheter(action1, 5);
  
-         // Capture the output using a print stream to verify afficherPortefeuille()
-         // This will print information about the portfolio
-         String texte_afficher = portefeuille.afficherPortefeuille(jour);
-        assertTrue(texte_afficher.contains("Action1 : 5 actions (Valeur unitaire: 10"));
+         //Vérifie que le texte afficher est correcte
+         String texteAfficher = portefeuille.afficherPortefeuille(jour);
+        assertTrue(texteAfficher.contains("Action1 : 5 actions (Valeur unitaire: 10"));
     }
  } 

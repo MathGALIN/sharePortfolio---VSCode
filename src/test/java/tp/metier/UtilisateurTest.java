@@ -16,10 +16,8 @@
 
 package tp.metier;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 
 class UtilisateurTest {
 
@@ -27,8 +25,8 @@ class UtilisateurTest {
     private Portefeuille portefeuille;
     private Action action;
 
-    @BeforeEach
-    void setUp() {
+    @Test
+    void testAcheterActions() {
         // Création d'un utilisateur avec un solde initial de 1000€
         portefeuille = new Portefeuille();  
         action = new Action("AAPL") {  
@@ -38,13 +36,10 @@ class UtilisateurTest {
             }
         };
         utilisateur = new Utilisateur("John Doe", 1000);  
-        utilisateur.setPortefeuille(portefeuille);  // Associer le portefeuille à l'utilisateur
-    }
+        utilisateur.setPortefeuille(portefeuille);  
 
-    @Test
-    void testAcheterActions() {
         // L'utilisateur achète 10 actions AAPL à 50€ chacune
-        String result = utilisateur.acheterActions(action, 10, 50);
+        String result = utilisateur.acheterActions(action, 10, 50); 
 
         // Vérification du résultat
         assertEquals("10 actions de AAPL achetées pour 500.0€.", result);
@@ -53,6 +48,16 @@ class UtilisateurTest {
 
     @Test
     void testAcheterActions_FondsInsuffisants() {
+        portefeuille = new Portefeuille();  
+        action = new Action("AAPL") {  
+            @Override
+            public float valeur(Jour j) {
+                return 100.0f;  
+            }
+        };
+        utilisateur = new Utilisateur("John Doe", 1000);  
+        utilisateur.setPortefeuille(portefeuille);
+
         // L'utilisateur essaie d'acheter 30 actions à 50€ chacune (le total est 1500€)
         String result = utilisateur.acheterActions(action, 30, 50);
 
@@ -63,6 +68,16 @@ class UtilisateurTest {
 
     @Test
     void testVendreActions() {
+        portefeuille = new Portefeuille();  
+        action = new Action("AAPL") {  
+            @Override
+            public float valeur(Jour j) {
+                return 100.0f;  
+            }
+        };
+        utilisateur = new Utilisateur("John Doe", 1000);  
+        utilisateur.setPortefeuille(portefeuille);
+
         // L'utilisateur achète 20 actions AAPL, puis en vend 10
         portefeuille.acheter(action, 20);  // Acheter 20 actions AAPL
         String result = utilisateur.vendreActions(action, 10, 50);  // Vendre 10 actions à 50€ chacune
@@ -74,6 +89,16 @@ class UtilisateurTest {
 
     @Test
     void testVendreActions_StocksInsuffisants() {
+        portefeuille = new Portefeuille();  
+        action = new Action("AAPL") {  
+            @Override
+            public float valeur(Jour j) {
+                return 100.0f;  
+            }
+        };
+        utilisateur = new Utilisateur("John Doe", 1000);  
+        utilisateur.setPortefeuille(portefeuille);
+
         // L'utilisateur possède seulement 5 actions AAPL et essaie d'en vendre 10
         portefeuille.acheter(action, 5);  // Acheter 5 actions AAPL
         String result = utilisateur.vendreActions(action, 10, 50);  // Essayer de vendre 10 actions
@@ -82,5 +107,4 @@ class UtilisateurTest {
         assertEquals("Vous n'avez pas assez d'actions à vendre.", result);
         assertEquals(1000, utilisateur.getSolde());  // Le solde de l'utilisateur ne doit pas changer
     }
-
 }
