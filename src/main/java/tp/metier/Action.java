@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
 
 import java.util.Objects;
 
@@ -23,6 +23,8 @@ import java.util.Objects;
  */
 public abstract class Action {
 
+    //Attribut
+    //Nom de l'action
     private String libelle;
 
     /**
@@ -34,13 +36,16 @@ public abstract class Action {
         return libelle;
     }
 
-    public Action(String libelle) {
+    //Constructeur
+    protected Action(String libelle) {
         this.libelle = libelle;
     }
 
+    //Renvoie la valeur de l'action le jour j
     public abstract float valeur(Jour j);
 
     @Override
+    //Renvoie le hash de la fonction
     public int hashCode() {
         int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.libelle);
@@ -48,20 +53,23 @@ public abstract class Action {
     }
 
     @Override
+    //Vérifie si l'action est égale à une autre action
     public boolean equals(Object obj) {
+        
+
         if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
+
         final Action other = (Action) obj;
-        if (!Objects.equals(this.libelle, other.libelle)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.libelle, other.libelle);
+        
     }
 
+    //Renvoie le string de l'action
     public String toString() {
         return this.getLibelle();
     }

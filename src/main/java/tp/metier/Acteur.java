@@ -13,12 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
 
-/**
- *
- * @author perussel
- */
-public class Cours {
+package tp.metier;
 
+public abstract class Acteur {
+    protected int id;
+    protected String nom;
+
+    protected Acteur(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Acteur: " + nom + " (ID: " + id + ")";
+    }
 }

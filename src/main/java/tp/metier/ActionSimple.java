@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,18 +32,20 @@ public class ActionSimple extends Action {
         // Action simple initialisée comme 1 action
         super(libelle);
         // init spécifique
-        this.mapCours = new HashMap();
+        this.mapCours = new HashMap<>();
     }
 
     // enrg possible si pas de cours pour ce jour
     public void enrgCours(Jour j, float v) {
-        if (this.mapCours.containsKey(j) == false)
-            this.mapCours.put(j, new Cours(j, v));
+
+        this.mapCours.computeIfAbsent(j, key -> new Cours(key, v));
+    
     }
 
     @Override
+    //Permet d'obtenir la valeur d'une action pour un jour j
     public float valeur(Jour j) {
-        if (this.mapCours.containsKey(j) == true)
+        if (this.mapCours.containsKey(j))
             return this.mapCours.get(j).getValeur();
         else
             return 0; // definition d'une constante possible
@@ -52,22 +54,60 @@ public class ActionSimple extends Action {
     // encapsulation de la définition de la classe Cours
     private class Cours {
 
+        //Attribut jour, valeur
         private Jour jour;
-
         private float valeur;
 
+        //Renvoie la valeur
         public float getValeur() {
             return valeur;
         }
 
+        //Renvoie le jour
         public Jour getJour() {
             return jour;
         }
 
+        //Permet de crée le cours
         public Cours(Jour jour, float valeur) {
             this.jour = jour;
             this.valeur = valeur;
         }
 
     }
+
+    //Fonction pour mettre à jour le cours
+    public void mettreAJourCours(Jour j, float v) {
+        this.mapCours.put(j, new Cours(j, v)); // Mise à jour ou ajout
+    }
+
+    @Override
+    //Permet d'obtenir le hashcode d'une fonction simple
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((mapCours == null) ? 0 : mapCours.hashCode());
+        return result;
+    }
+
+    @Override
+    //Permet de savoir si deux actions simples sont égales
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ActionSimple other = (ActionSimple) obj;
+        if (mapCours == null) {
+            if (other.mapCours != null)
+                return false;
+        } else if (!mapCours.equals(other.mapCours))
+            return false;
+        return true;
+    }
+
+
+    
 }

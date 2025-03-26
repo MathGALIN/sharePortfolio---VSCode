@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,14 +23,16 @@ import java.util.Map;
  * @author perussel
  */
 public class ActionComposee extends Action {
+
     // attribut lien
     Map<ActionSimple, Float> mapPanier;
 
     public ActionComposee(String libelle) {
         super(libelle);
-        this.mapPanier = new HashMap();
+        this.mapPanier = new HashMap<>();
     }
 
+    // Fonction pour enregistrer une action dans l'action composé
     public void enrgComposition(ActionSimple as, float pourcentage) {
         this.mapPanier.put(as, pourcentage);
     }
@@ -38,13 +40,32 @@ public class ActionComposee extends Action {
     @Override
     public float valeur(Jour j) {
         float valeur;
-
         valeur = 0;
-        for (ActionSimple as : this.mapPanier.keySet()) {
-            valeur = valeur + (as.valeur(j) * this.mapPanier.get(as));
+
+        for (Map.Entry<ActionSimple, Float> entry : this.mapPanier.entrySet()) {
+            ActionSimple as = entry.getKey();
+            Float mapValue = entry.getValue();
+            valeur = valeur + (as.valeur(j) * mapValue);
         }
 
         return valeur;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ActionComposee)) {
+            return false;
+        }
+        ActionComposee other = (ActionComposee) obj;
+        return super.equals(other) && this.mapPanier.equals(other.mapPanier);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 31 + mapPanier.hashCode();
     }
 
 }

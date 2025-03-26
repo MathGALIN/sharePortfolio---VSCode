@@ -13,32 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.exec;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
-/**
- *
- * @author David Navarre &lt;David.Navarre at irit.fr&gt;
- */
-class ActionTest {
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
-    @Test
-    void testGetLibelle() {
-        final Action action = new ActionImpl();
-        Assertions.assertNotNull(action.getLibelle());
-    }
+import tp.metier.*;
 
-    public class ActionImpl extends Action {
+public class Run {
 
-        public ActionImpl() {
-            super("");
-        }
+    public static void main(String[] args) {
+        
+        Portefeuille portefeuille = new Portefeuille();
+        ActionSimple action1 = new ActionSimple("Action1");
+        Jour jour = new Jour(2025, 73);
 
-        public float valeur(Jour j) {
-            return 0.0F;
-        }
+        action1.enrgCours(jour, 10.0f);
+
+        portefeuille.acheter(action1, 5);
+
+        // Capture the output using a print stream to verify afficherPortefeuille()
+        // This will print information about the portfolio
+        portefeuille.afficherPortefeuille(jour);
+
     }
 
 }

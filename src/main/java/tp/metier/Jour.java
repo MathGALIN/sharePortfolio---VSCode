@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package tp.metier;
 
 /**
  *
@@ -21,6 +21,7 @@ package tp04.metier;
  */
 public class Jour {
 
+    // Attribut, numéro du jour et annee
     private int annee;
     private int noJour;
 
@@ -42,12 +43,14 @@ public class Jour {
         return noJour;
     }
 
+    // Constructeur
     public Jour(int annee, int noJour) {
         this.annee = annee;
         this.noJour = noJour;
     }
 
     @Override
+    // Renvoie le hash du jour
     public int hashCode() {
         int hash = 7;
         hash = 61 * hash + this.annee;
@@ -57,20 +60,15 @@ public class Jour {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Jour other = (Jour) obj;
-        if (this.annee != other.annee) {
-            return false;
-        }
-        if (this.noJour != other.noJour) {
-            return false;
-        }
-        return true;
+        Jour param_jour = (Jour) obj;
+        return this.annee == param_jour.annee && this.noJour == param_jour.noJour;
     }
+    
 
 }
