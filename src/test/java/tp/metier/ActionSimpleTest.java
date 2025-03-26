@@ -93,8 +93,10 @@ class ActionSimpleTest {
 
     @Test
     void testValeurAvecCoursExistant() {
+
+        //Vérifie que la bonne valeur de cours est bien renvoyé pour un jour
         ActionSimple action = new ActionSimple("ActionTest");
-        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+        Jour jour = new Jour(2025, 79);
         action.enrgCours(jour, 100.0f);
 
         float valeur = action.valeur(jour);
@@ -103,17 +105,19 @@ class ActionSimpleTest {
 
     @Test
     void testValeurAvecCoursInexistant() {
+       
+        //Crée une action sans cours pour un jour et test
         ActionSimple action = new ActionSimple("ActionTest");
-        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+        Jour jour = new Jour(2025, 79);
 
         float valeur = action.valeur(jour);
-        assertEquals(0.0f, valeur, 0.001f); // Devrait retourner 0 si pas de cours enregistré
+        assertEquals(0.0f, valeur, 0.001f);
     }
 
     @Test
     void testMettreAJourCours() {
         ActionSimple action = new ActionSimple("ActionTest");
-        Jour jour = new Jour(2025, 79); // 19 mars ≈ 79e jour de l'année (non bissextile)
+        Jour jour = new Jour(2025, 79);
 
         // Enregistrer un premier cours
         action.enrgCours(jour, 100.0f);
@@ -121,7 +125,7 @@ class ActionSimpleTest {
 
         // Mettre à jour le cours
         action.mettreAJourCours(jour, 150.0f);
-        assertEquals(150.0f, action.valeur(jour), 0.001f); // La valeur doit être mise à jour
+        assertEquals(150.0f, action.valeur(jour), 0.001f);
     }
 
 
