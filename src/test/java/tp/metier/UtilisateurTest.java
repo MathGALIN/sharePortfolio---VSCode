@@ -23,7 +23,7 @@ class UtilisateurTest {
         utilisateur.setPortefeuille(portefeuille);  
 
         // L'utilisateur achète 10 actions AAPL à 50€ chacune
-        String result = utilisateur.acheterActions(action, 10, 50);
+        String result = utilisateur.acheterActions(action, 10, 50); 
 
         // Vérification du résultat
         assertEquals("10 actions de AAPL achetées pour 500.0€.", result);
