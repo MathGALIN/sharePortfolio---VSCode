@@ -75,7 +75,6 @@ public class Portefeuille {
             }
         }
     }
-    
 
     public String toString() {
         return this.mapLignes.toString();
