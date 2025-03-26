@@ -26,7 +26,7 @@ public class Portefeuille {
 
     Map<Action, LignePortefeuille> mapLignes;
 
-    public class LignePortefeuille {
+    private class LignePortefeuille {
 
         private Action action;
 
@@ -67,14 +67,11 @@ public class Portefeuille {
     }
 
     public void vendre(Action a, int q) {
-        if (this.mapLignes.containsKey(a)) {
-            int currentQte = this.mapLignes.get(a).getQte();
-            System.out.println("Vente de " + q + " actions de " + a.getLibelle() + ". Quantité actuelle: " + currentQte);
-            if (currentQte >= q) {
-                this.mapLignes.get(a).setQte(currentQte - q);
-                if (this.mapLignes.get(a).getQte() == 0) {
-                    this.mapLignes.remove(a);
-                }
+        if (this.mapLignes.containsKey(a) == true) {
+            if (this.mapLignes.get(a).getQte() > q) {
+                this.mapLignes.get(a).setQte(this.mapLignes.get(a).getQte() - q);
+            } else if (this.mapLignes.get(a).getQte() == q) {
+                this.mapLignes.remove(a);
             }
         }
     }
