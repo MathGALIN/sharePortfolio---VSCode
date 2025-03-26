@@ -187,4 +187,4 @@ class ActionComposeeTest {
         assertNotEquals(actionComposee1.hashCode(), actionComposee2.hashCode(),
                 "Les hash codes des objets ActionComposee différents ne devraient pas être identiques.");
     }
-}
+} 
