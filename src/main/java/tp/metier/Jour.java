@@ -69,6 +69,5 @@ public class Jour {
         Jour param_jour = (Jour) obj;
         return this.annee == param_jour.annee && this.noJour == param_jour.noJour;
     }
-    
 
 }
