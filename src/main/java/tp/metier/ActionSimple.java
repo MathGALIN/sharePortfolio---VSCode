@@ -76,6 +76,11 @@ public class ActionSimple extends Action {
 
     }
 
+    //Fonction pour mettre à jour le cours
+    public void mettreAJourCours(Jour j, float v) {
+        this.mapCours.put(j, new Cours(j, v)); // Mise à jour ou ajout
+    }
+
     @Override
     //Permet d'obtenir le hashcode d'une fonction simple
     public int hashCode() {

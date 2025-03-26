@@ -28,7 +28,7 @@ public class Portefeuille {
     Map<Action, LignePortefeuille> mapLignes;
 
     //Classe interne correspondant au ligne du portefeuille
-    private class LignePortefeuille {
+    public class LignePortefeuille {
 
         //Attribut, action, quantite
         private Action action;
@@ -59,6 +59,7 @@ public class Portefeuille {
         public String toString() {
             return Integer.toString(qte);
         }
+
     }
 
     //Constructeur du portefeuille
@@ -86,6 +87,21 @@ public class Portefeuille {
         }
     }
 
+    //Fonction pour vendre prix Unitaire
+    public float vendreUnitaire(Action a, int q, float prixUnitaire) {
+        if (this.mapLignes.containsKey(a)) {
+            int qteActuelle = this.mapLignes.get(a).getQte();
+            if (qteActuelle >= q) {
+                this.mapLignes.get(a).setQte(qteActuelle - q);
+                if (this.mapLignes.get(a).getQte() == 0) {
+                    this.mapLignes.remove(a);
+                }
+                return q * prixUnitaire;  // ✅ 返回卖出金额
+            }
+        }
+        return 0;  // 如果股票不存在或卖出失败，返回 0
+    }
+
     //Renvoie le portefeuille au format string
     public String toString() {
         return this.mapLignes.toString();
@@ -99,4 +115,46 @@ public class Portefeuille {
         }
         return total;
     }
+
+    //Récupéraion des informations des lignes
+    public Map<Action, LignePortefeuille> getMapLignes() {
+        return this.mapLignes;
+    }
+
+    public Map<Action, Integer> consulterActions() {
+        Map<Action, Integer> result = new HashMap<>();
+        for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().getQte());
+        }
+        return result;
+    }
+
+
+    
+    public String afficherPortefeuille(Jour j) {
+        String portefeuilleInfo = ""; // Start with an empty string
+    
+        if (mapLignes.isEmpty()) {
+            portefeuilleInfo += "Votre portefeuille est vide.\n";  // Concatenate string when portfolio is empty
+        } else {
+            portefeuilleInfo += "Votre portefeuille contient :\n";  // Indicate that the portfolio contains items
+            for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
+                Action action = entry.getKey();
+                int quantite = entry.getValue().getQte();
+                float prix = action.valeur(j);
+    
+                // Concatenate each action's info to the string
+                portefeuilleInfo += String.format("%s : %d actions (Valeur unitaire: %.1f€)\n", 
+                        action.getLibelle(), quantite, prix);
+            }
+        }
+    
+        // Print the constructed string
+        System.out.print(portefeuilleInfo);
+    
+        // Return the string for further use
+        return portefeuilleInfo;
+    }
+    
+
 }

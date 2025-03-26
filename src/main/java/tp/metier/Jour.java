@@ -59,19 +59,16 @@ public class Jour {
     }
 
     @Override
-    // Permet de savoir si deux jours sont les mêmes
     public boolean equals(Object obj) {
-        if (obj == null) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Jour other = (Jour) obj;
-        if (this.annee != other.annee) {
-            return false;
-        }
-        return this.noJour != other.noJour;
+        Jour param_jour = (Jour) obj;
+        return this.annee == param_jour.annee && this.noJour == param_jour.noJour;
     }
+    
 
 }
