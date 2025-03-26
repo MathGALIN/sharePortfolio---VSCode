@@ -57,24 +57,22 @@
  
      @Test
      void testActionIntrouvable() {
-         // Action that does not exist
+         //Création d'un jour
          Jour jour2 = new Jour(2025, 80);
          
-         // Capture the output for non-existent action
+         //Vérifie ce que print une action non existante
          ByteArrayOutputStream outContent = new ByteArrayOutputStream();
          System.setOut(new PrintStream(outContent));
- 
          String result = gestionnaire.mettreAJourPrix("ORANGE", jour2, 200.0f);
          assertEquals("Action introuvable !", result);
      }
  
      @Test
      void testAffichagePrixActionIntrouvable() {
-         // Test afficherPrix with non-existing action
+        
+        // Test afficher le prix pour une action introuvable
          Jour jour2 = new Jour(2025, 80);
- 
-         // Capture the output for non-existent action
-         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+          ByteArrayOutputStream outContent = new ByteArrayOutputStream();
          System.setOut(new PrintStream(outContent));
  
          String result = gestionnaire.afficherPrix("ORANGE", jour2);
@@ -83,16 +81,16 @@
  
      @Test
      void testMiseAJourPrixAvecValeurInvalide() {
-         // Test updating price with negative value or zero
-         Jour jour2 = new Jour(2025, 80);
          
-         // Invalid price (negative)
+        //Mise à jour des prix avec des valeurs négatives ou nulles
+
+        Jour jour2 = new Jour(2025, 80);
+         
          String result1 = gestionnaire.mettreAJourPrix("APPLE", jour2, -50.0f);
-         assertEquals("Prix mis à jour pour APPLE le 80/2025 à -50.0.", result1); // Assuming no validation on negative prices
+         assertEquals("Prix mis à jour pour APPLE le 80/2025 à -50.0.", result1);
  
-         // Invalid price (zero)
          String result2 = gestionnaire.mettreAJourPrix("APPLE", jour2, 0.0f);
-         assertEquals("Prix mis à jour pour APPLE le 80/2025 à 0.0.", result2); // Assuming no validation on zero prices
+         assertEquals("Prix mis à jour pour APPLE le 80/2025 à 0.0.", result2);
      }
  
      @Test
