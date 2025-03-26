@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 David Navarre &lt;David.Navarre at irit.fr&gt;.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package tp04.metier;
 
 import java.util.HashMap;
@@ -30,26 +45,35 @@ public class GestionnaireActions {
      * @param prix    Le nouveau prix.
      */
     public void mettreAJourPrix(String libelle, Jour jour, float prix) {
-        ActionSimple action = actions.get(libelle);
-        if (action != null) {
-            action.mettreAJourCours(jour, prix);
-            System.out.println("Prix mis à jour pour " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " à " + prix + "€.");
-        } else {
-            System.out.println("Action introuvable !");
+        if (prix < 0) {
+            throw new IllegalArgumentException("Le prix d'une action ne peut pas être négatif.");
         }
+    
+        ActionSimple action = actions.get(libelle);
+        if (action == null) {
+            throw new IllegalArgumentException("Action introuvable: " + libelle);
+        }
+    
+        action.mettreAJourCours(jour, prix);
+        System.out.println("Prix mis à jour pour " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " à " + prix + "€.");
     }
+    
 
     /**
      * Affiche les prix d'une action donnée.
      * @param libelle Le nom de l'action.
      * @param jour Le jour demandé.
      */
-    public void afficherPrix(String libelle, Jour jour) {
+    public String afficherPrix(String libelle, Jour jour) {
         ActionSimple action = actions.get(libelle);
         if (action != null) {
-            System.out.println("Prix de " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee() + " : " + action.valeur(jour) + "€.");
+            return "Prix de " + libelle + " le " + jour.getNoJour() + "/" + jour.getAnnee()
+                   + " : " + action.valeur(jour) + "€.";
         } else {
-            System.out.println("Action introuvable !");
+            return "Action introuvable !";
         }
     }
 }
+    
+
+

@@ -59,7 +59,7 @@ public class Run {
         investisseur.acheterAction(axa, 10, axa.valeur(j1));
  
 
-        // 4️⃣ 显示投资组合内容
+        // Afficher le contenu du portefeuille
         System.out.println("\n=== Affichage du Portefeuille ===");
         investisseur.afficherPortefeuille(j1);
     }

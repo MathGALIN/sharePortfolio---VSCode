@@ -41,7 +41,7 @@ public class ActionSimple extends Action {
             this.mapCours.put(j, new Cours(j, v));
     }
 
-     /**
+       /**
      * Ajoute ou met à jour un cours pour une journée donnée.
      *
      * @param j   Le jour du cours.
@@ -50,6 +50,7 @@ public class ActionSimple extends Action {
     public void mettreAJourCours(Jour j, float v) {
         this.mapCours.put(j, new Cours(j, v)); // Mise à jour ou ajout
     }
+
 
     @Override
     public float valeur(Jour j) {
