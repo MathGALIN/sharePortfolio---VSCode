@@ -17,14 +17,18 @@
 package tp.metier;
 
 public abstract class Acteur {
+
+    //Attribut
     protected int id;
     protected String nom;
 
+    //Constructeur
     protected Acteur(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
 
+    //Getter et setter
     public int getId() {
         return id;
     }
