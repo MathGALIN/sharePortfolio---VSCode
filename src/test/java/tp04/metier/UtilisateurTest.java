@@ -99,6 +99,24 @@ public class UtilisateurTest {
         // Vérifier que le message d'erreur est renvoyé
         assertEquals("Fonds insuffisants pour l'achat.", result);
     }
+    @Test
+    public void testVendreActions_Success() {
+    // Créer un utilisateur et une action
+    Utilisateur utilisateur = new Utilisateur("John Doe", 1000f);
+    Action action = new ActionBoursiere("AAPL", 150f);  // Action Apple, prix 150€
+    Portefeuille portefeuille = utilisateur.getPortefeuille();
+
+    // L'utilisateur possède 10 actions AAPL
+    portefeuille.acheter(action, 10);
+
+    // L'utilisateur vend 5 actions AAPL à 150€ chacune
+    String result = utilisateur.vendreActions(action, 5, 150f);
+    
+    // Vérifier que la vente a réussi et que le solde est correct
+    assertEquals("5 actions de AAPL vendues pour 750.0€.", result);
+    assertEquals(1750f, utilisateur.getSolde(), 0.01f);  // Le solde doit être 1000 + 750
+    assertEquals(5, portefeuille.getMapLignes().get(action).getQte());  // L'utilisateur possède maintenant 5 actions
+}
 
     @Test
     public void testConsulterPortefeuille() {
