@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 class JourTest {
 
     @Test
+    //test constructeur et getter pour un jour
     void testConstructeurGetter() {
         Jour jour = new Jour(2025, 120);
         assertEquals(2025, jour.getAnnee());
@@ -34,6 +35,7 @@ class JourTest {
 
 
     @Test
+    //Test le hashcode pour un jour
     void testHashCode() {
         Jour jour1 = new Jour(2025, 120);
         Jour jour2 = new Jour(2025, 120);
@@ -44,6 +46,7 @@ class JourTest {
     }
 
     @Test
+    //Test que deux jours soient égaux ou non
     void testEquals() {
         Jour jour1 = new Jour(2025, 120);
         Jour jour2 = new Jour(2025, 120);
