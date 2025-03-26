@@ -88,6 +88,7 @@ public class Portefeuille {
         }
         return total;
     }
+    
     // 获取所有股票信息
     public Map<Action, LignePortefeuille> getMapLignes() {
         return mapLignes;
