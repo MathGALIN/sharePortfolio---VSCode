@@ -26,7 +26,7 @@ public class Portefeuille {
 
     Map<Action, LignePortefeuille> mapLignes;
 
-    private class LignePortefeuille {
+    public class LignePortefeuille {
 
         private Action action;
 
@@ -88,7 +88,7 @@ public class Portefeuille {
         }
         return total;
     }
-    
+
     // 获取所有股票信息
     public Map<Action, LignePortefeuille> getMapLignes() {
         return mapLignes;
